@@ -1,7 +1,7 @@
 [package]
 name = "soliris"
 version = "0.1.0"
-authors = ["Luca Georges François <luca@quartz.technology>"]
+authors = ["Luca Georges François <luca@quartz.technology>", "Tom Chauveau <tom@quartz.technology>"]
 edition = "2021"
 description = "Solidity code scanner and optimizer."
 repository = "https://github.com/quartz-technology/soliris"
