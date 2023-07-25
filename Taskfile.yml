@@ -1,0 +1,37 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task: format
+      - task: clippy
+      - task: test
+      - task: build-release
+    silent: true
+
+  build-debug:
+    cmds:
+      - cargo build
+    silent: true
+
+  build-release:
+    cmds:
+      - cargo build --release
+    silent: true
+
+  format:
+    cmds:
+      - cargo fmt --all -- --check
+    silent: true
+
+  clippy:
+    cmds:
+      - cargo clippy -- -D warnings
+    silent: true
+
+  test:
+    cmds:
+      - cargo test -- --nocapture
+    silent: true
