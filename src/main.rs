@@ -1,3 +1,6 @@
-fn main() {
-    println!("Hello, world! Soliris is Solidity code scanner and optimizer.");
+mod cli;
+mod scan;
+
+fn main() -> Result<(), anyhow::Error> {
+    cli::run()
 }
