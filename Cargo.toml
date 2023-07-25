@@ -1,0 +1,14 @@
+[package]
+name = "soliris"
+version = "0.1.0"
+authors = ["Luca Georges François <luca@quartz.technology>"]
+edition = "2021"
+description = "Solidity code scanner and optimizer."
+repository = "https://github.com/quartz-technology/soliris"
+license = "MIT"
+keywords = ["blockchain", "ethereum", "solidity", "ast", "optimisation"]
+categories = ["command-line-utilities", "development-tools"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
