@@ -1,6 +1,7 @@
-use crate::scan;
 use anyhow::Context;
 use clap::{Parser, Subcommand};
+
+use crate::commands::scan;
 
 pub fn run() -> Result<(), anyhow::Error> {
     let opt = Cli::parse();
