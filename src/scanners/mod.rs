@@ -1,4 +1,12 @@
-use super::metadata::Metadata;
+pub mod implementations;
+pub mod memory;
+
+use self::implementations::{
+    missing_comments::MissingComments, mutable_functions::MutableFunctions,
+    mutable_variables::MutableVariables, struct_repacker::StructRepacker,
+    unused_imports::UnusedImports,
+};
+use crate::scanners::memory::Metadata;
 use syn_solidity::Item;
 
 pub trait Scanner {
@@ -10,6 +18,7 @@ pub struct Registry {
 }
 
 impl Registry {
+    #[allow(dead_code)]
     pub fn register_scanner(&mut self, scanner: Box<dyn Scanner>) {
         self.scanners.push(scanner)
     }
@@ -21,16 +30,21 @@ impl Registry {
 
 impl Default for Registry {
     fn default() -> Self {
-        // TODO: Add all default scanners.
-        Registry { scanners: vec![] }
+        Registry {
+            scanners: vec![
+                Box::<MissingComments>::default(),
+                Box::<UnusedImports>::default(),
+                Box::<MutableVariables>::default(),
+                Box::<MutableFunctions>::default(),
+                Box::<StructRepacker>::default(),
+            ],
+        }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::scan::metadata::Metadata;
-
-    use super::{Registry, Scanner};
+    use super::{Metadata, Registry, Scanner};
     use syn_solidity::Item;
 
     #[derive(Default)]
@@ -46,7 +60,7 @@ mod tests {
     fn it_creates_default_scanners_registry() {
         let scanners_registry = Registry::default();
 
-        assert_eq!(scanners_registry.get_scanners().len(), 0)
+        assert_eq!(scanners_registry.get_scanners().len(), 5)
     }
 
     #[test]
@@ -55,6 +69,6 @@ mod tests {
 
         scanners_registry.register_scanner(Box::new(MockScanner::default()));
 
-        assert_eq!(scanners_registry.get_scanners().len(), 1)
+        assert_eq!(scanners_registry.get_scanners().len(), 6)
     }
 }

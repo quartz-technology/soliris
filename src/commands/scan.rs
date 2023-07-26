@@ -1,11 +1,9 @@
-mod metadata;
-mod scanner;
-
-use self::{metadata::Metadata, scanner::Registry};
 use anyhow::Context;
 use clap::Parser;
 use std::fs;
 use syn_solidity::{File, Item};
+
+use crate::scanners::{memory::Metadata, Registry};
 
 #[derive(Debug, Parser)]
 pub struct Command {
