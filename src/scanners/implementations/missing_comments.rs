@@ -4,10 +4,12 @@ use syn_solidity::{
 
 use crate::scanners::{memory::Metadata, Scanner};
 
+/// A scanner responsible for looking at various Solidity items and reporting if documentation (comments) is missing.
 #[derive(Default)]
 pub struct MissingComments {}
 
 impl MissingComments {
+    /// Scan every item in the provided contract object and looks for missing documentation.
     fn scan_in_contract(&self, contract: &ItemContract, metadata: &Metadata) {
         for item in &contract.body {
             match item {
@@ -33,6 +35,15 @@ impl MissingComments {
         }
     }
 
+    /// Report if a contract item is not documented.
+    /// A potential fix should be:
+    ///
+    /// ```
+    /// /**
+    ///  * @dev Just a simple contract which does nothing!
+    ///  */
+    /// contract SimpleContract {}
+    /// ```
     fn check_missing_comments_for_contract(&self, contract: &ItemContract, metadata: &Metadata) {
         if contract.attrs.is_empty() {
             let line = contract.span().start().line;
@@ -45,6 +56,18 @@ impl MissingComments {
         }
     }
 
+    /// Report if a enum is not documented.
+    /// A potential fix should be:
+    ///
+    /// ```
+    /// /**
+    ///  * @dev Supported varieties of Quartz.
+    ///  */
+    /// enum QuartzType {
+    ///     Amethyst,
+    ///     Agate,
+    /// }
+    /// ```
     fn check_missing_comments_for_enum(&self, enumeration: &ItemEnum, metadata: &Metadata) {
         if enumeration.attrs.is_empty() {
             let line = enumeration.span().start().line;
@@ -57,6 +80,13 @@ impl MissingComments {
         }
     }
 
+    /// Report if a event is not documented.
+    /// A potential fix should be:
+    ///
+    /// ```
+    /// /// @dev Emitted when a new Quartz has been mined!
+    /// event QuartzMined(QuartzType indexed variety);
+    /// ```
     fn check_missing_comments_for_event(&self, event: &ItemEvent, metadata: &Metadata) {
         if event.attrs.is_empty() {
             let line = event.span().start().line;
@@ -69,6 +99,13 @@ impl MissingComments {
         }
     }
 
+    /// Report if an error is not documented.
+    /// A potential fix should be:
+    ///
+    /// ```
+    /// /// @dev Your favorite stone was broken :(
+    /// error BrokenQuartz();
+    /// ```
     fn check_missing_comments_for_error(&self, error: &ItemError, metadata: &Metadata) {
         if error.attrs.is_empty() {
             let line = error.span().start().line;
@@ -81,6 +118,15 @@ impl MissingComments {
         }
     }
 
+    /// Report if a function is not documented.
+    /// A potential fix should be:
+    ///
+    /// ```
+    /// /// @dev Tells you if the Amethyst variety is good looking.
+    /// function IsAmethystBeautiful() public returns (bool) {
+    ///    return true;
+    /// }
+    /// ```
     fn check_missing_comments_for_function(&self, function: &ItemFunction, metadata: &Metadata) {
         if function.attrs.is_empty() {
             let line = function.span().start().line;
@@ -93,6 +139,15 @@ impl MissingComments {
         }
     }
 
+    /// Report if a structure is not documented.
+    /// A potential fix should be:
+    ///
+    /// ```
+    /// /// @dev Composition of your favorite rock.
+    /// structure Quartz {
+    ///     QuartzType variety;
+    /// }
+    /// ```
     fn check_missing_comments_for_structure(&self, structure: &ItemStruct, metadata: &Metadata) {
         if structure.attrs.is_empty() {
             let line = structure.span().start().line;
@@ -105,6 +160,13 @@ impl MissingComments {
         }
     }
 
+    /// Report if a user-defined type is not documented.
+    /// A potential fix should be:
+    ///
+    /// ```
+    /// /// @dev Got this one from OpenZeppelin, I ran out of Quartz references.
+    /// type ShortString is bytes32;
+    /// ```
     fn check_missing_comments_for_udt(&self, udt: &ItemUdt, metadata: &Metadata) {
         if udt.attrs.is_empty() {
             let line = udt.span().start().line;
@@ -119,6 +181,7 @@ impl MissingComments {
 }
 
 impl Scanner for MissingComments {
+    /// Scans every root item (recursively if there is a contract) and reports missing documentation.
     fn execute(&self, ast: &[Item], metadata: &Metadata) {
         for item in ast {
             match item {

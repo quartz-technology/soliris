@@ -2,18 +2,25 @@
 
 pragma solidity ^0.8.15;
 
-error CustomError();
+error BrokenQuartz();
 
-enum Size {
-    SMALL,
-    MEDIUM,
-    LARGE
+enum QuartzType {
+    Amethyst,
+    Agate,
 }
+
+struct Quartz {
+    QuartzType variety;
+}
+
+type ShortString is bytes32;
 
 contract SimpleContract {
     uint256 a = 42;
 
-    function f() public {
-        a = a * 2;
+    event QuartzMined(QuartzType indexed variety);
+
+    function IsAmethystBeautiful() public returns (bool) {
+        return true;
     }
 }
