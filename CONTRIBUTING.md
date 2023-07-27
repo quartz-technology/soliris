@@ -1,3 +1,5 @@
 # Contributing
 
-_Coming soon !_
+Thank you for helping us improve / fix Soliris ❤️
+
+Documentation for contributing to the project will be here soon!
