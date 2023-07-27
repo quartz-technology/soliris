@@ -2,6 +2,14 @@
 
 pragma solidity ^0.8.15;
 
+error CustomError();
+
+enum Size {
+    SMALL,
+    MEDIUM,
+    LARGE
+}
+
 contract SimpleContract {
     uint256 a = 42;
 
