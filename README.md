@@ -15,13 +15,13 @@ Cover by [DALL-E](https://openai.com/dall-e-2/).
 We want to help Solidity developers write better smart contracts.
 Various tools have been developed with this goal in mind: [Foundry](https://github.com/foundry-rs/foundry), [Slither](https://github.com/crytic/slither), [Heimdall](https://github.com/Jon-Becker/heimdall-rs) and so many more.
 
-The release of the [alloy-rs core librairies](https://github.com/alloy-rs/core) gave us the opportunity to experiment with the Solidity AST in Rust and we immediatly knew that we could build something upon it.
+The release of the [alloy-rs core libraries](https://github.com/alloy-rs/core) gave us the opportunity to experiment with the Solidity AST in Rust, and we immediately knew that we could build something upon it.
 
 We opted for a project able to evolve and scale. A software able to perform various scans on Solidity code - using the AST - and report valuable information to the developer.
 
 Soliris does not aim to be specialized in one single topic and should preferably hold scanners with different purposes: improving code syntax, giving more context about the contract's state, propose memory improvements and more.
 But we also acknowledge the limitations of the solution: it will never replace a compiler, nor a dedicated security tool such as Slither.
-It's more of a serious test demontrating the possibilities of [syn-solidity](https://github.com/alloy-rs/core/tree/main/crates/syn-solidity).
+It's more of a serious test demonstrating the possibilities of [syn-solidity](https://github.com/alloy-rs/core/tree/main/crates/syn-solidity).
 
 ## Development Status
 
@@ -34,9 +34,9 @@ Below is a list of the scanners implementation statuses:
 |    Name       	     | Goal                                                                                                         	 | Status 	 |
 |:-------------------:|----------------------------------------------------------------------------------------------------------------|:--------:|
 | Missing Comments 	  | Reports missing comments in your code.                                                                       	 |  ✅   	   |
-|  Unused Imports  	  | Reports unused `import` declarations in your contracts.                                                      	 |  ❌   	   |
 | Mutable Functions 	 | Reports functions able to mutate your contract's state.                                                      	 |  ✅   	   |
 | Mutable Variables 	 | Reports variables likely to mutate.                                                                          	 |  ✅   	   |
+|  Unused Imports  	  | Reports unused `import` declarations in your contracts.                                                      	 |  ❌   	   |
 | Mutation Grapher 	  | Creates a graph showing the variables likely to mutate connected to the places where they undergo mutations. 	 |  ❌   	   |
 | Struct Repacker  	  | Suggests an alternative way to define a struct such that it takes less storage slots.                        	 |  ❌   	   |
 
