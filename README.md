@@ -31,14 +31,14 @@ Today, `soliris` **is not production-ready** and might report false information.
 
 Below is a list of the scanners implementation statuses:
 
-|    Name       	     | Goal                                                                                                         	 | Status 	 |
-|:-------------------:|----------------------------------------------------------------------------------------------------------------|:--------:|
-| Missing Comments 	  | Reports missing comments in your code.                                                                       	 |  ✅   	   |
-|  Unused Imports  	  | Reports unused `import` declarations in your contracts.                                                      	 |  ❌   	   |
-| Mutable Functions 	 | Reports functions able to mutate your contract's state.                                                      	 |  ✅   	   |
-| Mutable Variables 	 | Reports variables likely to mutate.                                                                          	 |  ✅   	   |
-| Mutation Grapher 	  | Creates a graph showing the variables likely to mutate connected to the places where they undergo mutations. 	 |  ❌   	   |
-| Struct Repacker  	  | Suggests an alternative way to define a struct such that it takes less storage slots.                        	 |  ❌   	   |
+|        Name       	| Goal                                                                                                         	| Status 	|
+|:-----------------:	|--------------------------------------------------------------------------------------------------------------	|:------:	|
+|  Missing Comments 	| Reports missing comments in your code.                                                                       	|    ✅   	|
+|   Unused Imports  	| Reports unused `import` declarations in your contracts.                                                      	|    ❌   	|
+| Mutable Functions 	| Reports functions able to mutate your contract's state.                                                      	|    ✅   	|
+| Mutable Variables 	| Reports variables likely to mutate.                                                                          	|    ✅   	|
+|  Mutation Grapher 	| Creates a graph showing the variables likely to mutate connected to the places where they undergo mutations. 	|    ❌   	|
+|  Struct Repacker  	| Suggests an alternative way to define a struct such that it takes less storage slots.                        	|    ❌   	|
 
 ## Getting Started
 
