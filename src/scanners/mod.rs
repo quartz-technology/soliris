@@ -3,8 +3,8 @@ pub mod memory;
 
 use self::implementations::{
     missing_comments::MissingComments, mutable_functions::MutableFunctions,
-    mutable_variables::MutableVariables, struct_repacker::StructRepacker,
-    unused_imports::UnusedImports,
+    mutable_variables::MutableVariables, mutation_grapher::MutationGrapher,
+    struct_repacker::StructRepacker, unused_imports::UnusedImports,
 };
 use crate::scanners::memory::Metadata;
 use syn_solidity::Item;
@@ -37,6 +37,7 @@ impl Default for Registry {
                 Box::<MutableVariables>::default(),
                 Box::<MutableFunctions>::default(),
                 Box::<StructRepacker>::default(),
+                Box::<MutationGrapher>::default(),
             ],
         }
     }
@@ -60,7 +61,7 @@ mod tests {
     fn it_creates_default_scanners_registry() {
         let scanners_registry = Registry::default();
 
-        assert_eq!(scanners_registry.get_scanners().len(), 5)
+        assert_eq!(scanners_registry.get_scanners().len(), 6)
     }
 
     #[test]
@@ -69,6 +70,6 @@ mod tests {
 
         scanners_registry.register_scanner(Box::new(MockScanner::default()));
 
-        assert_eq!(scanners_registry.get_scanners().len(), 6)
+        assert_eq!(scanners_registry.get_scanners().len(), 7)
     }
 }
