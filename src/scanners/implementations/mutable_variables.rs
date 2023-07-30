@@ -5,6 +5,7 @@ use syn_solidity::{Item, ItemContract, VariableAttribute, VariableDefinition};
 pub struct MutableVariables {}
 
 impl MutableVariables {
+    /// Scans all variables from the contract while discarding the other items.
     fn scan_contract(&self, contract: &ItemContract, metadata: &Metadata) {
         for item in &contract.body {
             if let Item::Variable(variable) = item {
@@ -13,6 +14,7 @@ impl MutableVariables {
         }
     }
 
+    /// Reports if a variable is likely to mutate.
     fn scan_variable(&self, variable: &VariableDefinition, metadata: &Metadata) {
         let immutable_variable_attributes = [
             &VariableAttribute::Constant(Default::default()),
@@ -36,6 +38,7 @@ impl MutableVariables {
 }
 
 impl Scanner for MutableVariables {
+    /// Scans every contract and reports variables able to mutate.
     fn execute(&self, ast: &[Item], metadata: &Metadata) {
         for item in ast {
             if let Item::Contract(contract) = item {
