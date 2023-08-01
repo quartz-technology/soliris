@@ -3,6 +3,7 @@ pub struct Metadata<'a> {
     pub file_path: &'a str,
 }
 
+#[allow(dead_code)]
 impl<'a> Metadata<'a> {
     pub fn new(file_path: &'a str) -> Self {
         Metadata { file_path }

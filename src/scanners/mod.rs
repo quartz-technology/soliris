@@ -1,16 +1,19 @@
 pub mod implementations;
 pub mod memory;
+pub mod result;
 
-use self::implementations::{
-    missing_comments::MissingComments, mutable_functions::MutableFunctions,
-    mutable_variables::MutableVariables, mutation_grapher::MutationGrapher,
-    struct_repacker::StructRepacker, unused_imports::UnusedImports,
+use self::{
+    implementations::{
+        missing_comments::MissingComments, mutable_functions::MutableFunctions,
+        mutable_variables::MutableVariables, mutation_grapher::MutationGrapher,
+        struct_repacker::StructRepacker, unused_imports::UnusedImports,
+    },
+    result::Reporter,
 };
-use crate::scanners::memory::Metadata;
 use syn_solidity::Item;
 
 pub trait Scanner {
-    fn execute(&self, ast: &[Item], metadata: &Metadata);
+    fn execute(&self, ast: &[Item], reporter: &mut Reporter);
 }
 
 pub struct Registry {
@@ -45,14 +48,14 @@ impl Default for Registry {
 
 #[cfg(test)]
 mod tests {
-    use super::{Metadata, Registry, Scanner};
+    use super::{result::Reporter, Registry, Scanner};
     use syn_solidity::Item;
 
     #[derive(Default)]
     struct MockScanner {}
 
     impl Scanner for MockScanner {
-        fn execute(&self, _ast: &[Item], _metadata: &Metadata) {
+        fn execute(&self, _ast: &[Item], _reporter: &mut Reporter) {
             todo!()
         }
     }
