@@ -17,3 +17,4 @@ clap = { version = "4", features = ["derive"] }
 syn-solidity = "0.3.0"
 syn = { version = "2.0.26", features = ["full"] }
 proc-macro2 = { version = "1.0.65", features = ["span-locations"]}
+colored = "2.0.4"
