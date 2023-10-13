@@ -2,7 +2,7 @@ use crate::scanners::{
     result::{Reporter, Severity},
     Scanner,
 };
-use syn_solidity::{FunctionAttribute, Item, ItemContract, ItemFunction, Mutability};
+use syn_solidity::{FunctionAttribute, Item, ItemContract, ItemFunction, Mutability, Spanned};
 
 #[derive(Default)]
 pub struct MutableFunctions {}
@@ -19,8 +19,7 @@ impl MutableFunctions {
 
     /// Reports if a function is able to mutate the contract state.
     fn scan_function(&self, function: &ItemFunction, reporter: &mut Reporter) {
-        // TODO: There is probably a cleaner way to check this.
-        if function.kind.as_str() == "modifier" {
+        if function.kind.is_modifier() {
             return;
         }
 
@@ -31,7 +30,7 @@ impl MutableFunctions {
         ];
 
         for ifa in immutable_function_attributes {
-            if function.attributes.get(ifa).is_some() {
+            if function.attributes.contains(ifa) {
                 return;
             }
         }

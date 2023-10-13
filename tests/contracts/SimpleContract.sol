@@ -6,7 +6,7 @@ error BrokenQuartz();
 
 enum QuartzType {
     Amethyst,
-    Agate,
+    Agate
 }
 
 struct Quartz {

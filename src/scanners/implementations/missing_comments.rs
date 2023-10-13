@@ -1,6 +1,4 @@
-use syn_solidity::{
-    Item, ItemContract, ItemEnum, ItemError, ItemEvent, ItemFunction, ItemStruct, ItemUdt,
-};
+use syn_solidity::{Item, ItemContract, ItemEnum, ItemError, ItemEvent, ItemFunction, ItemStruct, ItemUdt, Spanned};
 
 use crate::scanners::{
     result::{Reporter, Severity},

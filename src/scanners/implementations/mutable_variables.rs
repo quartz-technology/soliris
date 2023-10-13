@@ -2,7 +2,7 @@ use crate::scanners::{
     result::{Reporter, Severity},
     Scanner,
 };
-use syn_solidity::{Item, ItemContract, VariableAttribute, VariableDefinition};
+use syn_solidity::{Item, ItemContract, Spanned, VariableAttribute, VariableDefinition};
 
 #[derive(Default)]
 pub struct MutableVariables {}
@@ -25,7 +25,7 @@ impl MutableVariables {
         ];
 
         for iva in immutable_variable_attributes {
-            if variable.attributes.0.get(iva).is_some() {
+            if variable.attributes.0.contains(iva) {
                 return;
             }
         }
