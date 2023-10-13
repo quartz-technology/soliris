@@ -27,10 +27,10 @@ impl From<&VariableDeclaration> for BinItem {
                 syn_solidity::Type::Int(_, s) => s.unwrap().get(),
                 syn_solidity::Type::Uint(_, s) => s.unwrap().get(),
                 syn_solidity::Type::Array(_) => 32,
-                syn_solidity::Type::Tuple(_) => todo!(),
-                syn_solidity::Type::Function(_) => todo!(),
+                syn_solidity::Type::Tuple(_) => 0, // todo!()
+                syn_solidity::Type::Function(_) => 0, // todo!()
                 syn_solidity::Type::Mapping(_) => 32,
-                syn_solidity::Type::Custom(_) => todo!(),
+                syn_solidity::Type::Custom(_) => 0, // todo!()
             },
         }
     }
