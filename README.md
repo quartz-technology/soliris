@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-    Solidity code scanner and optimizer.
+    Solidity code scanner and optimizer protoype.
 </p>
 
 Cover by [DALL-E](https://openai.com/dall-e-2/).
