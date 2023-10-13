@@ -1,4 +1,4 @@
-use syn_solidity::{Item, ItemContract, ItemStruct, VariableDeclaration};
+use syn_solidity::{Item, ItemContract, ItemStruct, Spanned, VariableDeclaration};
 
 use crate::scanners::{
     result::{Reporter, Severity},
